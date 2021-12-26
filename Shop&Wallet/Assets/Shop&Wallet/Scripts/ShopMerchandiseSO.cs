@@ -1,5 +1,6 @@
 using UnityEngine;
-using SerializedDictionaries;
+using System;
+using System.Collections.Generic;
 
 namespace ShopWallet
 {
@@ -9,7 +10,16 @@ namespace ShopWallet
         [SerializeField] private string _merchName;
         public string merchName => _merchName;
 
-        [SerializeField] private SerializedDictionary<CurrencyType, float> _merchCost = new SerializedDictionary<CurrencyType, float>();
-        public SerializedDictionary<CurrencyType, float> merchCost => _merchCost;
+        [SerializeField] private List<StockValue> _merchCost = new List<StockValue>();
+        public List<StockValue> merchCost => _merchCost;
+    }
+
+    [Serializable]
+    public struct StockValue
+    {
+        [SerializeField] private CurrencyType _type;
+        public CurrencyType type => _type;
+        [SerializeField] private float _value;
+        public float value => _value;
     }
 }

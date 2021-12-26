@@ -16,12 +16,32 @@ namespace ShopWallet
         public Action<Wallet, ShopMerchandiseSO> AttemptPurchase =>
             (wallet, merch) => AttemptPayment(wallet.walletHoldings, merch, wallet.MakePaymentCallback);
 
+        private Func<List<StockValue>, Dictionary<CurrencyType, float>> StockValueConversion =>
+            (currencyList) =>
+            {
+                Dictionary<CurrencyType, float> dict = new Dictionary<CurrencyType, float>();
+                
+                foreach (var currency in currencyList)
+                {
+                    try
+                    {
+                        dict.Add(currency.type, currency.value);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.Log(e.Message);
+                    }
+                }
+
+                return dict;
+            };
+
         protected void AttemptPayment(Dictionary<CurrencyType, float> holdings, ShopMerchandiseSO merch,
             Action<Dictionary<CurrencyType, float>> paymentCallback)
         {
             if (PriceCheck(holdings, merch) && onSuccessfulPurchase != null)
             {
-                paymentCallback(merch.merchCost);
+                paymentCallback(StockValueConversion(merch.merchCost));
                 onSuccessfulPurchase(merch);
             }
             else if (onFailedPurchase != null)
@@ -37,16 +57,20 @@ namespace ShopWallet
         protected bool CanAffordPayment(Dictionary<CurrencyType, float> holdings, ShopMerchandiseSO merchandise)
         {
             bool canPurchase = false;
+            var merchCost = StockValueConversion(merchandise.merchCost);
 
             foreach (KeyValuePair<CurrencyType, float> item in holdings)
             {
-                if (item.Value >= merchandise.merchCost[item.Key])
+                if (!merchCost.ContainsKey(item.Key))
+                    continue;
+
+                if (item.Value >= merchCost[item.Key])
                 {
                     canPurchase = true;
                 }
-                else if (item.Value < merchandise.merchCost[item.Key])
+                else if (item.Value < merchCost[item.Key])
                 {
-                    Debug.Log("We do not have enough: " + item.Key + " we needed: " + merchandise.merchCost[item.Key] + " but we only had: " + item.Value);
+                    Debug.Log("We do not have enough: " + item.Key + " we needed: " + merchCost[item.Key] + " but we only had: " + item.Value);
                     canPurchase = false;
                     break;
                 }

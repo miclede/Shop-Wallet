@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _merchName: Barracks
   _merchCost:
-    keyData: 04000000020000000300000000000000
-    valueData: 64000000e80300000f00000032000000
+  - _type: 0
+    _value: 100
+  - _type: 1
+    _value: 55

@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: House_1
   m_EditorClassIdentifier: 
   _merchName: House
-  _merchType: 1
   _merchCost:
-    keyData: 020000000300000004000000
-    valueData: 640000000a00000005000000
+  - _type: 3
+    _value: 3
+  - _type: 1
+    _value: 1
+  - _type: 0
+    _value: 4

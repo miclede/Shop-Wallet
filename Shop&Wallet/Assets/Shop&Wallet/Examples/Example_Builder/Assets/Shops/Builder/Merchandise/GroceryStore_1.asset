@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _merchName: Grocery Store
   _merchCost:
-    keyData: 01000000020000000400000003000000
-    valueData: 9600000064000000050000001e000000
+  - _type: 2
+    _value: 5
+  - _type: 3
+    _value: 4
