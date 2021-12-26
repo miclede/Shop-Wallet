@@ -15,17 +15,18 @@ namespace ShopWallet
 
     public class Wallet : MonoBehaviour
     {
+        #region Public Actions
         public Action<Dictionary<CurrencyType, float>> MakePaymentCallback => (cost) => MakePayment(cost);
+        public Action<Dictionary<CurrencyType, float>> ReceivePaymentCallback => (payment) => ReceivePayment(payment);
+        #endregion
 
-        protected Dictionary<CurrencyType, float> _walletHoldings = new Dictionary<CurrencyType, float>();
+        private Dictionary<CurrencyType, float> _walletHoldings = new Dictionary<CurrencyType, float>();
         public Dictionary<CurrencyType, float> walletHoldings => _walletHoldings;
 
-        protected virtual void Awake()
-        {
-            InitializeHoldings();
-        }
+        private void Awake() => InitializeHoldings();
 
-        public void ReceivePayment(Dictionary<CurrencyType, float> payment)
+        #region Internal Logic
+        private void ReceivePayment(Dictionary<CurrencyType, float> payment)
         {
             foreach (KeyValuePair<CurrencyType, float> currency in payment)
             {
@@ -33,7 +34,7 @@ namespace ShopWallet
             }
         }
 
-        protected void InitializeHoldings()
+        private void InitializeHoldings()
         {
             foreach (CurrencyType currency in Enum.GetValues(typeof(CurrencyType)))
             {
@@ -50,5 +51,6 @@ namespace ShopWallet
                 else break;
             }
         }
+        #endregion
     }
 }

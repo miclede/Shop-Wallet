@@ -10,11 +10,15 @@ namespace ShopWallet.Example_Builder
         [SerializeField] private List<BobStoreButton> _storeButtons;
         [SerializeField] private Player _targetPlayer;
 
+        private void OnEnable()
+        {
+            _myStorefront.eventSuccess += BuildStructure;
+            _myStorefront.eventFailed += FailedBuilding;
+        }
+
         private void Start()
         {
             InitializeButtons();
-            _myStorefront.eventSuccess += BuildStructure;
-            _myStorefront.eventFailed += FailedBuilding;
         }
 
         private void InitializeButtons()
@@ -39,6 +43,12 @@ namespace ShopWallet.Example_Builder
         public void FailedBuilding(ShopMerchandiseSO merch)
         {
             Debug.Log("We cannot build: " + merch.merchName);
+        }
+
+        private void OnDisable()
+        {
+            _myStorefront.eventSuccess -= BuildStructure;
+            _myStorefront.eventFailed -= FailedBuilding;
         }
     }
 }

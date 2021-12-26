@@ -20,7 +20,7 @@ namespace ShopWallet.Example_Builder
             currencyToMint.Add(CurrencyType.Food, incomeAmount);
             currencyToMint.Add(CurrencyType.Minerals, incomeAmount);
 
-            _playerWallet.ReceivePayment(currencyToMint);
+            _playerWallet.ReceivePaymentCallback(currencyToMint);
         }
     }
 }
