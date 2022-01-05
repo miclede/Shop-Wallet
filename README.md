@@ -15,12 +15,12 @@ How a storefront is accessed by a wallet is determined by your project/game desi
 only a very basic example with the most straight forward approach is included in the project.
 
 How to:
--Attach Wallet.cs to a gameobject. 
--Attach Storefront.cs to an object. 
--Create a new Catalog for the store through <ShopWallet> scriptable object menu in project assets.
--Create new Merchandise for the store though <ShopWallet> sriptable object menu in project assets.
--Assign Merchandise to the created Catalog.
--Assign Catalog to Storefront via inspector reference. 
+1. Attach Wallet.cs to a gameobject. 
+2. Attach Storefront.cs to an object. 
+3. Create a new Catalog for the store through <ShopWallet> scriptable object menu in project assets.
+4. Create new Merchandise for the store though <ShopWallet> sriptable object menu in project assets.
+5. Assign Merchandise to the created Catalog.
+6. Assign Catalog to Storefront via inspector reference. 
 (Optionally also assign TransactionProcessor which is already created)
--Design and create the front end storefront and how it is accessible for your project.
+7. Design and create the front end storefront and how it is accessible for your project.
 (Open BobsBuildingShop example for details)
