@@ -3,10 +3,10 @@ Shop&Wallet
 Unity Version: 2020.3.25f1
 
 Installed Packages:
--None
+- None
 
 Installed Assets:
--TMP
+- TMP
 
 This project is a basic template used to create a shop / storefront for unity projects.
 It is still lacking some flexibility and functionality and is mostly focused on the backend logic.
