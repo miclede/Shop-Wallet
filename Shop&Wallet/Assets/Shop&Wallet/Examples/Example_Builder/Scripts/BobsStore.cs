@@ -23,16 +23,16 @@ namespace ShopWallet.Example_Builder
 
         private void InitializeButtons()
         {
-            if (_storeButtons.Count == _myStorefront.shopCatalog.shopStock.Count)
+            if (_storeButtons.Count == _myStorefront.shopStock.Count)
             {
                 int i = 0;
-                foreach (var item in _myStorefront.shopCatalog.shopStock)
+                foreach (var item in _myStorefront.shopStock)
                 {
                     _storeButtons[i].InitializeButton(_myStorefront.AttemptPurchase, item, _targetPlayer);
                     i++;
                 }
             }
-            else throw new Exception("The button list count is not equal to the item count in: " + _myStorefront.shopCatalog);
+            else throw new Exception("The button list count is not equal to the item count in: " + _myStorefront.shopStock);
         }
 
         public void BuildStructure(ShopMerchandiseSO merch)

@@ -55,16 +55,16 @@ namespace ShopWallet
             bool canPurchase = false;
             var merchCost = StockValueConversion(merchandise.merchCost);
 
-            foreach (KeyValuePair<CurrencyType, float> item in holdings)
+            foreach (KeyValuePair<CurrencyType, float> item in merchCost)
             {
-                if (!merchCost.ContainsKey(item.Key))
+                if (!holdings.ContainsKey(item.Key))
                     continue;
 
-                if (item.Value >= merchCost[item.Key])
+                if (holdings[item.Key] >= item.Value)
                 {
                     canPurchase = true;
                 }
-                else if (item.Value < merchCost[item.Key])
+                else if (holdings[item.Key] < item.Value)
                 {
                     Debug.Log("We do not have enough: " + item.Key + " we needed: " + merchCost[item.Key] + " but we only had: " + item.Value);
                     canPurchase = false;

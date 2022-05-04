@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,8 +12,8 @@ namespace ShopWallet
         public OnTransactionEvent eventFailed;
 
         [SerializeField] private TransactionProcessor _transactionProcessor;
-        [SerializeField] private ShopCatalogSO _shopCatalog;
-        public ShopCatalogSO shopCatalog => _shopCatalog;
+        [SerializeField] private List<ShopMerchandiseSO> _shopStock = new List<ShopMerchandiseSO>();
+        public List<ShopMerchandiseSO> shopStock => _shopStock;
 
         private Action<ShopMerchandiseSO> eventSuccessCallback =>
             (merch) => eventSuccess(merch);
